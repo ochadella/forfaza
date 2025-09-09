@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tangkap Hati ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Fredoka", sans-serif;
+      background: url("6249c469-c559-4e88-986d-419f7bbb14ad.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .game-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2em;
+      cursor: pointer;
+      animation: fall linear;
+    }
+
+    @keyframes fall {
+      from { top: -50px; }
+      to { top: 100vh; }
+    }
+
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2em;
+      font-weight: bold;
+      color: #d63031;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .score-board {
+      position: absolute;
+      top: 380px; /* geser lebih ke bawah */
+      left: 51%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      color: #e84393;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #d63031;
+      display: none;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container" id="game">
+    <div class="score-board">❤️ Skor: <span id="score">0</span></div>
+    <div class="message" id="message">🎉 Kamu berhasil tangkap semua hatiku!  
+    Semangat terus WAPIC AIRCONKU ❤️</div>
+  </div>
+
+  <!-- Tambahan audio -->
+  <audio id="success-audio" src="aldi.mp3"></audio>
+
+  <script>
+    const game = document.getElementById("game");
+    const scoreDisplay = document.getElementById("score");
+    const message = document.getElementById("message");
+    let score = 0;
+    let gameActive = true;
+
+    function createHeart() {
+      if (!gameActive) return;
+
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * (window.innerWidth - 50) + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+      game.appendChild(heart);
+
+      heart.addEventListener("click", () => {
+        score++;
+        scoreDisplay.textContent = score;
+        heart.remove();
+
+        if (score >= 10) {
+          gameActive = false;
+          message.style.display = "block";
+          document.getElementById("success-audio").play(); // mainkan audio
+        }
+      });
+
+      setTimeout(() => {
+        if (heart.parentNode) heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 1000);
+  </script>
+</body>
+</html>
