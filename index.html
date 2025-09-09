@@ -4,55 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tangkap Hati ❤️</title>
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Fredoka", sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  
+    /* gradasi dasar */
+    background: linear-gradient(135deg, #ffd6e8, #ffeef8);
+  
+    /* tambah lebih banyak lingkaran bunga */
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255,182,193,0.6) 0 40px, transparent 41px),
+      radial-gradient(circle at 80% 30%, rgba(255,192,203,0.5) 0 50px, transparent 51px),
+      radial-gradient(circle at 30% 70%, rgba(255,105,180,0.4) 0 35px, transparent 36px),
+      radial-gradient(circle at 70% 80%, rgba(219,112,147,0.5) 0 45px, transparent 46px),
+      radial-gradient(circle at 50% 10%, rgba(255,160,176,0.5) 0 30px, transparent 31px),
+      radial-gradient(circle at 90% 60%, rgba(255,182,193,0.4) 0 40px, transparent 41px),
+      radial-gradient(circle at 20% 85%, rgba(255,105,180,0.3) 0 35px, transparent 36px),
+      radial-gradient(circle at 60% 40%, rgba(219,112,147,0.4) 0 50px, transparent 51px);
+  
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
 
     .game-container {
       width: 100%;
       height: 100%;
       position: relative;
       overflow: hidden;
-      text-align: center;
     }
 
-    /* Header tulisan */
-    .header-text {
+    .greeting {
       position: absolute;
-      top: 20px;
+      top: 40px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
     }
 
-    .header-text h1 {
-      font-family: "Brush Script MT", cursive;
-      font-size: 60px;
-      color: #2d3436;
+    .greeting h1 {
+      font-family: sans-serif;
+      font-size: 3em; /* lebih besar */
+      color: #d63031;
       margin: 0;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
     }
 
-    .header-text h1 span {
-      font-family: "Georgia", serif;
-      font-size: 65px;
-      color: #1e272e;
-      font-weight: bold;
-    }
-
-    .header-text p {
-      margin: 5px 0 0;
-      font-size: 24px;
-      font-weight: bold;
-      color: #8e44ad;
+    .greeting h2 {
+      font-family: cursive;
+      font-size: 2.5em; /* lebih besar */
+      color: #e84393;
+      margin: 5px 0 0 0;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
     }
 
     .heart {
@@ -67,10 +77,21 @@
       to { top: 100vh; }
     }
 
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2em;
+      font-weight: bold;
+      color: #d63031;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
     .score-board {
       position: absolute;
-      top: 160px; /* di bawah header */
-      left: 50%;
+      top: 380px; /* geser lebih ke bawah */
+      left: 51%;
       transform: translateX(-50%);
       background: white;
       padding: 10px 20px;
@@ -100,19 +121,19 @@
 <body>
   <div class="game-container" id="game">
 
-    <!-- Header tulisan -->
-    <div class="header-text">
-      <h1>Hi <span>FAZA</span></h1>
-      <p>Tangkap hatiku 10x ya!</p>
+    <!-- Tulisan tengah -->
+    <div class="greeting">
+      <h1>Hi Faza!</h1>
+      <h2>Tangkap hatiku 10x ya!</h2>
     </div>
 
-    <!-- Skor -->
     <div class="score-board">❤️ Skor: <span id="score">0</span></div>
-
-    <!-- Pesan akhir -->
     <div class="message" id="message">🎉 Kamu berhasil tangkap semua hatiku!  
-    Aku sayang kamu selamanya ❤️</div>
+    Semangat terus WAPIC AIRCONKU ❤️</div>
   </div>
+
+  <!-- Audio berhasil -->
+  <audio id="success-audio" src="aldi.mp3"></audio>
 
   <script>
     const game = document.getElementById("game");
@@ -140,6 +161,7 @@
         if (score >= 10) {
           gameActive = false;
           message.style.display = "block";
+          document.getElementById("success-audio").play(); // mainkan audio
         }
       });
 
